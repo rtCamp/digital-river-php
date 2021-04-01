@@ -388,9 +388,9 @@ class Order implements ModelInterface, ArrayAccess
     const FRAUD_STATE_BLOCKED = 'blocked';
     const FRAUD_STATE_IN_REVIEW = 'in_review';
     const FRAUD_STATE_PASSED = 'passed';
-    
 
-    
+
+
     /**
      * Gets allowable values of the enum
      *
@@ -412,7 +412,7 @@ class Order implements ModelInterface, ArrayAccess
         $allowableAllCase = array_unique(array_merge(array_map('strtolower', $allowable), $allowable));
         return $allowableAllCase;
     }
-    
+
     /**
      * Gets allowable values of the enum
      *
@@ -429,7 +429,7 @@ class Order implements ModelInterface, ArrayAccess
         $allowableAllCase = array_unique(array_merge(array_map('strtolower', $allowable), $allowable));
         return $allowableAllCase;
     }
-    
+
 
     /**
      * Associative array for storing property values
@@ -505,7 +505,7 @@ class Order implements ModelInterface, ArrayAccess
         $invalidProperties = [];
 
         $allowedValues = $this->getStateAllowableValues();
-       
+
         if (!is_null($this->container['state']) && !in_array(strtolower($this->container['state']), $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value for 'state', must be one of '%s'",
@@ -514,7 +514,7 @@ class Order implements ModelInterface, ArrayAccess
         }
 
         $allowedValues = $this->getFraudStateAllowableValues();
-       
+
         if (!is_null($this->container['fraud_state']) && !in_array(strtolower($this->container['fraud_state']), $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value for 'fraud_state', must be one of '%s'",
@@ -1352,15 +1352,6 @@ class Order implements ModelInterface, ArrayAccess
      */
     public function setState($state)
     {
-        $allowedValues = $this->getStateAllowableValues();
-        if (!is_null($state) && !in_array(strtolower($state), $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'state', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
         $this->container['state'] = $state;
 
         return $this;
@@ -1409,15 +1400,6 @@ class Order implements ModelInterface, ArrayAccess
      */
     public function setFraudState($fraud_state)
     {
-        $allowedValues = $this->getFraudStateAllowableValues();
-        if (!is_null($fraud_state) && !in_array(strtolower($fraud_state), $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'fraud_state', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
         $this->container['fraud_state'] = $fraud_state;
 
         return $this;
